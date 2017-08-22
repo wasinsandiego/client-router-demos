@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getCharacters, getHouses, getBooks } from './app.actions'
 
-import MainNav from './ui/main-nav'
+import MainNav from '../ui/main-nav'
 // eslint-disable-next-line
-import Characters from './pages/characters'
+import Characters from '../pages/characters'
 // eslint-disable-next-line
-import Houses from './pages/houses'
+import Houses from '../pages/houses'
 // eslint-disable-next-line
-import Books from './pages/books'
+import Books from '../pages/books'
 
 import './app.css'
 
