@@ -1,0 +1,9 @@
+
+.list-items {
+  list-style-type: none;
+  -webkit-padding-start: 0;
+}
+
+.list-items>*:not(:last-child) {
+  border-bottom: solid 1px #e1e1e1;
+}

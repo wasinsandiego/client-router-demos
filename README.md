@@ -1,2 +1,10 @@
-# client-router-demos
-Some examples of an app with various routers implemented.
+# Client Side Router Demos
+
+## Setup
+
+```bash
+git clone
+cd client-router-demos
+yarn install
+yarn start
+```

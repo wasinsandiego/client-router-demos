@@ -1,0 +1,9 @@
+
+nav {
+  /*font-family: 'Cinzel Decorative', cursive;*/
+}
+
+.nav-items {
+  list-style-type: none;
+  -webkit-padding-start: 0;
+}

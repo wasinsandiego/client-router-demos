@@ -1,0 +1,43 @@
+
+.character-item,
+.house-item,
+.book-item {
+  padding: 20px 15px;
+}
+
+
+.character-item-title,
+.house-item-title,
+.book-item-title {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.character-item-description,
+.house-item-description,
+.book-item-description {
+  font-family: 'Cinzel Decorative', cursive;
+}
+
+.character-item-aliases {
+  font-family: 'Open Sans', sans-serif;
+  vertical-align: super;
+  font-size: 70%;
+}
+
+.character-item-status {
+
+}
+
+.is-dead .character-item-status {
+
+}
+
+.house-item-coat-arms {
+
+}
+
+.book-item-isbn {
+
+}
