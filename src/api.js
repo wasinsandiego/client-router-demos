@@ -6,14 +6,18 @@ const ENDPOINT_HOUSES = '/houses'
 const ENDPOINT_BOOKS = '/books'
 
 // example: `/characters?page=1&pageSize=10`
-const get = ({ endpoint, params }) => {
-  const url = `${rootUrl}${endpoint}?${Object.entries(params).join('&').split(',').join('=')}`
+const get = ({ endpoint, query }) => {
+  const url = `${rootUrl}${endpoint}?${Object.entries(query).join('&').split(',').join('=')}`
   return fetch(url)
     .then(response => {
       if (response.ok) {
         const links = parseLinkHeader(response.headers.get('Link'))
         // fetch is stupid
-        return response.json().then(data => ({ data, links }))
+        return response.json()
+          .then(data => {
+            data = !data.length ? [data] : data
+            return { data, links }
+          })
       } else {
         throw new Error('Network response was nope.')
       }
@@ -23,9 +27,9 @@ const get = ({ endpoint, params }) => {
     })
 }
 
-const getCharacters = ({ params }) => get({ endpoint: ENDPOINT_CHARACTERS, params })
-const getHouses = ({ params }) => get({ endpoint: ENDPOINT_HOUSES, params })
-const getBooks = ({ params }) => get({ endpoint: ENDPOINT_BOOKS, params })
+const getCharacters = ({ params, query }) => get({ endpoint: `${ENDPOINT_CHARACTERS}${params.id ? `/${params.id}` : ''}`, query })
+const getHouses = ({ params, query }) => get({ endpoint: `${ENDPOINT_HOUSES}${params.id ? `/${params.id}` : ''}`, query })
+const getBooks = ({ params, query }) => get({ endpoint: `${ENDPOINT_BOOKS}${params.id ? `/${params.id}` : ''}`, query })
 
 export default {
   get,
