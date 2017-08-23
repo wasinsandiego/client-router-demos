@@ -17,8 +17,8 @@
     "react-scripts": "0.9.5"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "start-rlr": "REACT_APP_ROUTER='redux-little-router' react-scripts start",
+    "start": "cp src/index.no-router.js src/index.js && react-scripts start",
+    "start-rlr": "cp src/index.redux-little-router.js src/index.js && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

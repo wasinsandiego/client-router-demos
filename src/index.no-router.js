@@ -5,13 +5,12 @@ import rootSagas from './app.sagas'
 import './index.css'
 
 /**
- * redux-little-router example
+ * no router example
  */
-import store from './redux-little-router/configure-store'
-import App from './redux-little-router/app'
+import store from './configure-store'
+import App from './app.no-router'
 
 store.runSaga(rootSagas)
-store.initLocation()
 
 ReactDOM.render(
   <Provider store={store}>
