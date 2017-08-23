@@ -5,12 +5,6 @@ import rootSagas from './app.sagas'
 import './index.css'
 
 /**
- * no router example
- */
-// import store from './configure-store'
-// import App from './app.no-router'
-
-/**
  * redux-little-router example
  */
 import store from './redux-little-router/configure-store'

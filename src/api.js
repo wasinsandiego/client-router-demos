@@ -27,9 +27,9 @@ const get = ({ endpoint, query }) => {
     })
 }
 
-const getCharacters = ({ params, query }) => get({ endpoint: `${ENDPOINT_CHARACTERS}${params.id ? `/${params.id}` : ''}`, query })
-const getHouses = ({ params, query }) => get({ endpoint: `${ENDPOINT_HOUSES}${params.id ? `/${params.id}` : ''}`, query })
-const getBooks = ({ params, query }) => get({ endpoint: `${ENDPOINT_BOOKS}${params.id ? `/${params.id}` : ''}`, query })
+const getCharacters = ({ params = {}, query }) => get({ endpoint: `${ENDPOINT_CHARACTERS}${params.id ? `/${params.id}` : ''}`, query })
+const getHouses = ({ params = {}, query }) => get({ endpoint: `${ENDPOINT_HOUSES}${params.id ? `/${params.id}` : ''}`, query })
+const getBooks = ({ params = {}, query }) => get({ endpoint: `${ENDPOINT_BOOKS}${params.id ? `/${params.id}` : ''}`, query })
 
 export default {
   get,

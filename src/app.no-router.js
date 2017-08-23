@@ -15,9 +15,9 @@ import './app.css'
 
 export class App extends Component {
   componentDidMount () {
-    this.props.getCharacters({ params: { page: 1, pageSize:10 } })
-    // this.props.getHouses({ params: { page: 1, pageSize:10 } })
-    // this.props.getBooks({ params: { page: 1, pageSize:10 } })
+    this.props.getCharacters({ query: { page: 1, pageSize:10 } })
+    // this.props.getHouses({ query: { page: 1, pageSize:10 } })
+    // this.props.getBooks({ query: { page: 1, pageSize:10 } })
   }
 
   render() {
