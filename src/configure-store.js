@@ -1,14 +1,14 @@
-import { applyMiddleware, createStore, compose } from 'redux'
+import { combineReducers, applyMiddleware, createStore, compose } from 'redux'
 import createSagaMiddleware, { END } from 'redux-saga'
-import initialState from '../initial-state'
-import reducers from '../reducers'
+import initialState from './initial-state'
+import * as appReducers from './reducers'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const sagaMiddleware = createSagaMiddleware()
 
 const configureStore = (state) => {
   const store = createStore(
-    reducers,
+    combineReducers({ ...appReducers }),
     state,
     composeEnhancers(applyMiddleware(sagaMiddleware))
   )

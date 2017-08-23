@@ -10,13 +10,11 @@ const BookItem = ({ url, name, authors = [], isbn }) => (
   </li>
 )
 
-const { string, array } = PropTypes
-
 BookItem.propTypes = {
-  url: string,
-  name: string,
-  authors: array,
-  isbn: string
+  url: PropTypes.string,
+  name: PropTypes.string,
+  authors: PropTypes.array,
+  isbn: PropTypes.string
 }
 
 export default BookItem

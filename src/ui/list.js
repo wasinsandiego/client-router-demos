@@ -13,10 +13,8 @@ const List = ({ data, ListItem }) => {
   )
 }
 
-const { array } = PropTypes
-
 List.propTypes = {
-  data: array.isRequired
+  data: PropTypes.array.isRequired
 }
 
 export default List

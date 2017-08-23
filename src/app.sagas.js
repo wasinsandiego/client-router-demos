@@ -9,7 +9,7 @@ import {
   getHouses,
   getBooks
 } from './app.actions'
-import api from '../api'
+import api from './api'
 
 /**
  *  SUB-ROUTINES

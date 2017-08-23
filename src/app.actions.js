@@ -17,19 +17,19 @@ export const apiCall = {
 }
 
 export const getCharacters = {
-  request: ({ params = {}, ...rest }) => action(GET_CHARACTERS.REQUEST, { params, ...rest }),
+  request: ({ params, ...rest }) => action(GET_CHARACTERS.REQUEST, { params, ...rest }),
   success: ({ data, links, ...rest }) => action(GET_CHARACTERS.SUCCESS, { data, links, ...rest }),
   failure: ({ error, ...rest }) => action(GET_CHARACTERS.FAILURE, { error, ...rest })
 }
 
 export const getHouses = {
-  request: ({ params = {}, ...rest }) => action(GET_HOUSES.REQUEST, { params, ...rest }),
+  request: ({ params, ...rest }) => action(GET_HOUSES.REQUEST, { params, ...rest }),
   success: ({ data, links, ...rest }) => action(GET_HOUSES.SUCCESS, { data, links, ...rest }),
   failure: ({ error, ...rest }) => action(GET_HOUSES.FAILURE, { error, ...rest })
 }
 
 export const getBooks = {
-  request: ({ params = {}, ...rest }) => action(GET_BOOKS.REQUEST, { params, ...rest }),
+  request: ({ params, ...rest }) => action(GET_BOOKS.REQUEST, { params, ...rest }),
   success: ({ data, links, ...rest }) => action(GET_BOOKS.SUCCESS, { data, links, ...rest }),
   failure: ({ error, ...rest }) => action(GET_BOOKS.FAILURE, { error, ...rest })
 }

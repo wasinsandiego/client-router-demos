@@ -9,6 +9,7 @@
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.3",
     "redux": "^3.6.0",
+    "redux-little-router": "^14.2.0",
     "redux-saga": "^0.15.6",
     "redux-thunk": "^2.2.0"
   },
@@ -17,6 +18,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-rlr": "REACT_APP_ROUTER='redux-little-router' react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

@@ -10,13 +10,11 @@ const HouseItem = ({ url, name, region, coatOfArms }) => (
   </li>
 )
 
-const { string } = PropTypes
-
 HouseItem.propTypes = {
-  url: string,
-  name: string,
-  region: string,
-  coatOfArms: string
+  url: PropTypes.string,
+  name: PropTypes.string,
+  region: PropTypes.string,
+  coatOfArms: PropTypes.string
 }
 
 export default HouseItem

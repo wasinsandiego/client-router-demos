@@ -1,9 +1,8 @@
-import { combineReducers } from 'redux'
 import {
   GET_CHARACTERS,
   GET_HOUSES,
   GET_BOOKS
-} from './app/app.actions'
+} from './app.actions'
 
 export const nav = (state = [], action) => (state)
 
@@ -33,10 +32,3 @@ export const books = (state = [], action) => {
   }
   return state
 }
-
-export default combineReducers({
-  nav,
-  characters,
-  houses,
-  books
-})

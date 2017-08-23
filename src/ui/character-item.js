@@ -16,14 +16,12 @@ const CharacterItem = ({ url, name, aliases, playedBy, died }) => (
   </li>
 )
 
-const { string, array } = PropTypes
-
 CharacterItem.propTypes = {
-  url: string,
-  name: string,
-  aliases: array,
-  playedBy: array,
-  died: string
+  url: PropTypes.string,
+  name: PropTypes.string,
+  aliases: PropTypes.array,
+  playedBy: PropTypes.array,
+  died: PropTypes.string
 }
 
 export default CharacterItem
