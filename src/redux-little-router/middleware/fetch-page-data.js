@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import { getCharacters, getHouses, getBooks } from '../../app.actions'
 
-const pageParams = { page: 1, pageSize: 10 }
+const pageParams = { page: 1, pageSize: 50 }
 const fetchPageData = store => next => action => {
   const { type, payload } = action
   // pass along the original action so all the things can happen

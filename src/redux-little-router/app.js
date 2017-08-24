@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Fragment } from 'redux-little-router'
 
 import MainNav from './main-nav'
+import Paginate from './paginate'
 import Characters from '../pages/characters'
 import Houses from '../pages/houses'
 import Books from '../pages/books'
@@ -15,6 +16,7 @@ import '../app.css'
 export class App extends Component {
 
   render() {
+    const currentPage = this.props.router.query.page || 1
     return (
       <div className='app'>
         <MainNav />
@@ -22,7 +24,11 @@ export class App extends Component {
         <hr />
         <main className='page'>
           <Fragment forRoute='/characters(/:id)'>
+            <span>
+            <Paginate currentPage={parseInt(currentPage, 10)} />
             <Characters />
+            <Paginate currentPage={parseInt(currentPage, 10)} />
+            </span>
           </Fragment>
           <Fragment forRoute='/houses(/:id)'>
             <Houses />

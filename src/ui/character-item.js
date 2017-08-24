@@ -6,8 +6,8 @@ const CharacterItem = ({ url, name, aliases, playedBy, died }) => (
   <li className={`character-item ${died ? 'is-dead' : ''}`}>
     <div className='character-item-title'>
       {name && <a href={url}>{name}</a>}
-      {!name && aliases && aliases.length && <a href={url}>{aliases.join(', ')}</a>}
-      {name && aliases && aliases.length &&
+      {!name && aliases && aliases[0] && <a href={url}>{aliases.join(', ')}</a>}
+      {name && aliases && aliases[0] &&
         <span className='character-item-aliases'>&nbsp;({aliases.join(', ')})</span>
       }
     </div>
