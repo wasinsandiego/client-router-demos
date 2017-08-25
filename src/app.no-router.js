@@ -21,7 +21,6 @@ export class App extends Component {
   }
 
   render() {
-    console.log('this.props.nav: ', this.props)
     const { nav } = this.props
     return (
       <div className='app'>

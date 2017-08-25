@@ -7,7 +7,8 @@ const ENDPOINT_BOOKS = '/books'
 
 // example: `/characters?page=1&pageSize=10`
 const get = ({ endpoint, query }) => {
-  const url = `${rootUrl}${endpoint}?${Object.entries(query).join('&').split(',').join('=')}`
+  const qStr = query ? `?${Object.entries(query).join('&').split(',').join('=')}` : ''
+  const url = `${rootUrl}${endpoint}${qStr}`
   return fetch(url)
     .then(response => {
       if (response.ok) {

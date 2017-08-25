@@ -25,7 +25,7 @@ yarn start
 yarn start-rlr
 
 # Run the app with `redux-first-router`
-# (not yet) yarn start-rfr
+yarn start-rfr
 
 # Run the app with `router5`
 # (not yet) yarn start-r5
