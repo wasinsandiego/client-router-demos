@@ -5,6 +5,10 @@ Based off this starter which is based off `create-react-app`.
  -http://blog.tylerbuchea.com/super-simple-react-redux-application-example/  
 )
 
+### [Routers Overview](https://gist.github.com/wasinsandiego/51f806d1972fff1eb6edaeb2dadaea9f)
+There is a gist [here](https://gist.github.com/wasinsandiego/51f806d1972fff1eb6edaeb2dadaea9f) with a bit of info and extra reading on some of the routers we looked at.
+
+
 ## Setup
 ```bash
 git clone
