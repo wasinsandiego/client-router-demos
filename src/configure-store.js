@@ -4,12 +4,14 @@ import initialState from './initial-state'
 import * as appReducers from './reducers'
 import thingClickCount from './thing'
 
+import characterHouses from './character-houses'
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const sagaMiddleware = createSagaMiddleware()
 
 const configureStore = (state) => {
   const store = createStore(
-    combineReducers({ ...appReducers, thingClickCount }),
+    combineReducers({ ...appReducers, thingClickCount, characterHouses }),
     state,
     composeEnhancers(applyMiddleware(sagaMiddleware))
   )

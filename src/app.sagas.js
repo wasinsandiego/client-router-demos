@@ -1,5 +1,5 @@
 import { takeEvery, call, fork, put, all, select } from 'redux-saga/effects'
-import { get, merge, mergeWith, pickBy, identity, isObject, chain } from 'lodash'
+import { merge, mergeWith, pickBy, identity } from 'lodash'
 import { push } from 'redux-little-router'
 import {
   API_CALL,
@@ -13,6 +13,8 @@ import {
   getBooks
 } from './app.actions'
 import api from './api'
+
+import { sagas as watchGetCharacterHouses } from './character-houses'
 
 /**
  *  SUB-ROUTINES
@@ -54,7 +56,7 @@ function * do_getBooks (action) {
 }
 
 
-const validPushKeys = ['pathname', 'query']
+// const validPushKeys = ['pathname', 'query']
 // function * do_pushPersist (action) {
 //   const { payload } = action
 //   const { pathname, query } = yield select(state => state.router)
@@ -108,6 +110,7 @@ function * watch_pushPersist () {
 //  ROOT SAGA
 export default function * root () {
   yield all([
+    fork(watchGetCharacterHouses),
     fork(watch_apiCall),
     fork(watch_getCharacters),
     fork(watch_getHouses),

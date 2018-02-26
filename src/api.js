@@ -6,9 +6,9 @@ const ENDPOINT_HOUSES = '/houses'
 const ENDPOINT_BOOKS = '/books'
 
 // example: `/characters?page=1&pageSize=10`
-const get = ({ endpoint, query }) => {
+const get = ({ baseUrl = rootUrl, endpoint, query }) => {
   const qStr = query ? `?${Object.entries(query).join('&').split(',').join('=')}` : ''
-  const url = `${rootUrl}${endpoint}${qStr}`
+  const url = `${baseUrl}${endpoint}${qStr}`
   return fetch(url)
     .then(response => {
       if (response.ok) {
@@ -24,7 +24,7 @@ const get = ({ endpoint, query }) => {
       }
     })
     .catch(error => {
-      console.log(`There has been a problem with your fetch operation: ${error.message}`)
+      throw new Error(`There has been a problem with your fetch operation: ${error.message}`)
     })
 }
 
@@ -33,6 +33,7 @@ const getHouses = ({ params = {}, query }) => get({ endpoint: `${ENDPOINT_HOUSES
 const getBooks = ({ params = {}, query }) => get({ endpoint: `${ENDPOINT_BOOKS}${params.id ? `/${params.id}` : ''}`, query })
 
 export default {
+  api: get,
   get,
   getCharacters,
   getHouses,

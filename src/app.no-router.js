@@ -1,49 +1,62 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getCharacters, getHouses, getBooks } from './app.actions'
-import { thingClicked, getThingClickCount } from './thing'
-
-import MainNav from './ui/main-nav'
-// eslint-disable-next-line
-import Characters from './pages/characters'
-// eslint-disable-next-line
-import Houses from './pages/houses'
-// eslint-disable-next-line
-import Books from './pages/books'
-
-import { Thing } from './thing/thing'
-
 import './app.css'
 
+import {
+  actions as characterHousesActions,
+  selectors as characterHousesSelectors,
+  CharacterHouses
+} from './character-houses'
+
+console.log('characterHousesActions.TRIGGER: ', characterHousesActions.TRIGGER)
+
 export class App extends Component {
-  componentDidMount () {
-    this.props.getCharacters({ query: { page: 1, pageSize:10 } })
-    // this.props.getHouses({ query: { page: 1, pageSize:10 } })
-    // this.props.getBooks({ query: { page: 1, pageSize:10 } })
+  constructor (props) {
+    super(props)
+    this.state = {
+      characterId: ''
+    }
   }
 
-  thingClicked = () => this.props.thingClicked({ count: this.props.thingClickCount + 1 })
+  componentDidMount () {
+    this.props.getCharacterHouses({ characterId: this.state.characterId })
+  }
+
+  updateCharatcerId = (event) => {
+    this.setState({ characterId: event.target.value })
+  }
+
+  onButtonClicked = () => {
+    this.props.getCharacterHouses({ characterId: this.state.characterId })
+  }
 
   render() {
-    const { nav } = this.props
+    const { characterName, characterTitle, characterHouses } = this.props
     return (
       <div className='app'>
-        <MainNav data={nav}/>
         <h1>Game of Thrones</h1>
         <hr />
         <main className='page'>
-          <Thing
-            title='THING'
-            description='This is a thing.'
-            count={this.props.thingClickCount}
-            onThingClicked={this.thingClicked}
+          <input
+            type='text'
+            placeholder='Enter charcter ID'
+            value={this.state.characterId}
+            onChange={this.updateCharatcerId}
           />
-          {/*
-          <Characters />
-          <Houses />
-          <Books />
-          */}
+          <button
+            type='button'
+            onClick={this.onButtonClicked}
+          >
+            Get Character Houses
+          </button>
+          {characterName && characterTitle &&
+            <CharacterHouses
+              characterName={characterName}
+              characterTitle={characterTitle}
+              houses={characterHouses}
+            />
+          }
         </main>
       </div>
     )
@@ -53,27 +66,21 @@ export class App extends Component {
 
 App.propTypes = {
   // mapStateToProps
-  metadata: PropTypes.object,
-  nav: PropTypes.array.isRequired,
-  thingClickCount: PropTypes.number,
+  characterName: PropTypes.string,
+  characterTitle: PropTypes.string,
+  characterHouses: PropTypes.array,
   // mapDispatchToProps
-  getCharacters: PropTypes.func,
-  getHouses: PropTypes.func,
-  getBooks: PropTypes.func,
-  thingClicked: PropTypes.func
+  getCharacterHouses: PropTypes.func,
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  metadata: state.metadata,
-  nav: state.nav,
-  thingClickCount: getThingClickCount(state)
+  characterName: characterHousesSelectors.characterName(state),
+  characterTitle: characterHousesSelectors.characterTitle(state),
+  characterHouses: characterHousesSelectors.characterHouses(state)
 })
 
 const mapDispatchToProps = {
-  getCharacters: getCharacters.request,
-  getHouses: getHouses.request,
-  getBooks: getBooks.request,
-  thingClicked
+  getCharacterHouses: characterHousesActions.trigger
 }
 
 const AppContainer = connect(
