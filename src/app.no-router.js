@@ -3,13 +3,12 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import './app.css'
 
+import LoadingAnim from './loading-anim'
 import {
   actions as characterHousesActions,
   selectors as characterHousesSelectors,
   CharacterHouses
 } from './character-houses'
-
-console.log('characterHousesActions.TRIGGER: ', characterHousesActions.TRIGGER)
 
 export class App extends Component {
   constructor (props) {
@@ -20,7 +19,7 @@ export class App extends Component {
   }
 
   componentDidMount () {
-    this.props.getCharacterHouses({ characterId: this.state.characterId })
+    // this.props.getCharacterHouses({ characterId: this.state.characterId })
   }
 
   updateCharatcerId = (event) => {
@@ -32,7 +31,7 @@ export class App extends Component {
   }
 
   render() {
-    const { characterName, characterTitle, characterHouses } = this.props
+    const { characterName, characterTitle, characterAllegiances, characterHousesIsLoading } = this.props
     return (
       <div className='app'>
         <h1>Game of Thrones</h1>
@@ -50,12 +49,15 @@ export class App extends Component {
           >
             Get Character Houses
           </button>
-          {characterName && characterTitle &&
+          {!characterHousesIsLoading && characterName && characterTitle &&
             <CharacterHouses
               characterName={characterName}
               characterTitle={characterTitle}
-              houses={characterHouses}
+              houses={characterAllegiances}
             />
+          }
+          {characterHousesIsLoading &&
+            <LoadingAnim />
           }
         </main>
       </div>
@@ -68,7 +70,8 @@ App.propTypes = {
   // mapStateToProps
   characterName: PropTypes.string,
   characterTitle: PropTypes.string,
-  characterHouses: PropTypes.array,
+  characterAllegiances: PropTypes.array,
+  characterHousesIsLoading: PropTypes.bool,
   // mapDispatchToProps
   getCharacterHouses: PropTypes.func,
 }
@@ -76,7 +79,8 @@ App.propTypes = {
 const mapStateToProps = (state, ownProps) => ({
   characterName: characterHousesSelectors.characterName(state),
   characterTitle: characterHousesSelectors.characterTitle(state),
-  characterHouses: characterHousesSelectors.characterHouses(state)
+  characterAllegiances: characterHousesSelectors.characterAllegiances(state),
+  characterHousesIsLoading: characterHousesSelectors.characterHousesLoadingStatus(state)
 })
 
 const mapDispatchToProps = {
