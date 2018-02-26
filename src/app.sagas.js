@@ -1,9 +1,12 @@
-import { takeEvery, call, fork, put, all } from 'redux-saga/effects'
+import { takeEvery, call, fork, put, all, select } from 'redux-saga/effects'
+import { get, merge, mergeWith, pickBy, identity, isObject, chain } from 'lodash'
+import { push } from 'redux-little-router'
 import {
   API_CALL,
   GET_CHARACTERS,
   GET_HOUSES,
   GET_BOOKS,
+  PUSH_PERSIST,
   apiCall,
   getCharacters,
   getHouses,
@@ -50,6 +53,35 @@ function * do_getBooks (action) {
   yield call(fetchBooks, action)
 }
 
+
+const validPushKeys = ['pathname', 'query']
+// function * do_pushPersist (action) {
+//   const { payload } = action
+//   const { pathname, query } = yield select(state => state.router)
+//   const pushPayload = mergeWith({}, { pathname, query }, payload, (objValue, srcValue) => {
+//     if (isObject(objValue) pickBy(pushPayload, identity))
+//   })
+//   console.log('pushPayload', pickBy(pushPayload, identity))
+//   yield put(push(pickBy(pushPayload, identity)))
+// }
+
+
+const mergeForPush = (next, prev) => (
+  mergeWith({}, next, prev, (objValue, srcValue, key) => (
+    // objValue is prev, srcValue is next
+    (key === 'query' && objValue && srcValue) ?
+      pickBy(merge(srcValue, objValue), identity) :
+      objValue || srcValue
+  ))
+)
+
+function * do_pushPersist (action) {
+  const { payload } = action
+  const { pathname, query } = yield select(state => state.router)
+  const nextRouterState = mergeForPush(payload, { pathname, query })
+  yield put(push(nextRouterState))
+}
+
 /**
  *  WATCHERS
  */
@@ -69,12 +101,17 @@ function * watch_getBooks () {
   yield takeEvery(GET_BOOKS.REQUEST, do_getBooks)
 }
 
+function * watch_pushPersist () {
+  yield takeEvery(PUSH_PERSIST, do_pushPersist)
+}
+
 //  ROOT SAGA
 export default function * root () {
   yield all([
     fork(watch_apiCall),
     fork(watch_getCharacters),
     fork(watch_getHouses),
-    fork(watch_getBooks)
+    fork(watch_getBooks),
+    fork(watch_pushPersist)
   ])
 }

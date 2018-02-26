@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getCharacters, getHouses, getBooks } from './app.actions'
+import { thingClicked, getThingClickCount } from './thing'
 
 import MainNav from './ui/main-nav'
 // eslint-disable-next-line
@@ -10,6 +11,8 @@ import Characters from './pages/characters'
 import Houses from './pages/houses'
 // eslint-disable-next-line
 import Books from './pages/books'
+
+import { Thing } from './thing/thing'
 
 import './app.css'
 
@@ -20,6 +23,8 @@ export class App extends Component {
     // this.props.getBooks({ query: { page: 1, pageSize:10 } })
   }
 
+  thingClicked = () => this.props.thingClicked({ count: this.props.thingClickCount + 1 })
+
   render() {
     const { nav } = this.props
     return (
@@ -28,8 +33,14 @@ export class App extends Component {
         <h1>Game of Thrones</h1>
         <hr />
         <main className='page'>
-          <Characters />
+          <Thing
+            title='THING'
+            description='This is a thing.'
+            count={this.props.thingClickCount}
+            onThingClicked={this.thingClicked}
+          />
           {/*
+          <Characters />
           <Houses />
           <Books />
           */}
@@ -44,21 +55,25 @@ App.propTypes = {
   // mapStateToProps
   metadata: PropTypes.object,
   nav: PropTypes.array.isRequired,
+  thingClickCount: PropTypes.number,
   // mapDispatchToProps
   getCharacters: PropTypes.func,
   getHouses: PropTypes.func,
-  getBooks: PropTypes.func
+  getBooks: PropTypes.func,
+  thingClicked: PropTypes.func
 }
 
 const mapStateToProps = (state, ownProps) => ({
   metadata: state.metadata,
-  nav: state.nav
+  nav: state.nav,
+  thingClickCount: getThingClickCount(state)
 })
 
 const mapDispatchToProps = {
   getCharacters: getCharacters.request,
   getHouses: getHouses.request,
-  getBooks: getBooks.request
+  getBooks: getBooks.request,
+  thingClicked
 }
 
 const AppContainer = connect(

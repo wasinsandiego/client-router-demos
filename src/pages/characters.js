@@ -3,8 +3,22 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import List from '../ui/list'
 import CharacterItem from '../ui/character-item'
+import { pushPersist } from '../app.actions'
+import { push } from 'redux-little-router'
 
 class CharactersPage extends Component {
+
+  componentDidMount() {
+    setTimeout(() => {
+      // this.props.push({
+      //   query: {
+      //     page: 2
+      //   },
+      //   persistQuery: true
+      // })
+      this.props.pushPersist({ query: { page: '2' } })
+    }, 3000)
+  }
 
   render () {
     return (
@@ -25,7 +39,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-
+  push,
+  pushPersist
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CharactersPage)

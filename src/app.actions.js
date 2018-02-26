@@ -33,3 +33,6 @@ export const getBooks = {
   success: ({ data, links, ...rest }) => action(GET_BOOKS.SUCCESS, { data, links, ...rest }),
   failure: ({ error, ...rest }) => action(GET_BOOKS.FAILURE, { error, ...rest })
 }
+
+export const PUSH_PERSIST = 'PUSH_PERSIST'
+export const pushPersist = (payload) => action(PUSH_PERSIST, payload)
